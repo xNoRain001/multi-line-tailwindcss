@@ -2,6 +2,7 @@ const { resolve } = require('path')
 const { stat, readdir, readFile, writeFile } = require('fs').promises
 
 const handler = async (filePath, maxLength, tabLength) => {
+  console.time(filePath)
   let html = await readFile(filePath, 'utf-8')
 
   html = html.replace(/\n(\s*)(:?class=")(.*?)(")/g, (
@@ -40,6 +41,7 @@ const handler = async (filePath, maxLength, tabLength) => {
   })
 
   await writeFile(filePath, html)
+  console.timeEnd(filePath)
 }
 
 const multiLineTailwindcss = async (cwd, maxLength, tabLength) => {
@@ -47,6 +49,12 @@ const multiLineTailwindcss = async (cwd, maxLength, tabLength) => {
 
   for (let i = 0, l = dirs.length; i < l; i++) {
     const dir = dirs[i]
+
+    // ignore node_modules
+    if (resolve(dir) === resolve('node_modules')) {
+      continue
+    }
+
     const _cwd = resolve(cwd, dir)
     const stats = await stat(_cwd)
 
