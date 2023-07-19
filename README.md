@@ -42,3 +42,9 @@ And run `multi-line-tailwindcss`.
   "
 ></div>
 ```
+
+## Options
+
+```
+multi-line-tailwindcss --max-length 80 --tab-length 2
+```
