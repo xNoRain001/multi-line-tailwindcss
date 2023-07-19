@@ -15,4 +15,4 @@ for (let i = 0, l = commands.length; i < l; i++) {
 const cwd = process.cwd()
 const { maxLength = 80, tabLength = 2 } = program.parse()._optionValues
 
-multiLineTailwindcss(cwd, maxLength, tabLength)
+multiLineTailwindcss(cwd, Number(maxLength), Number(tabLength))
